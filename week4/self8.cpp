@@ -2,7 +2,7 @@
 using namespace std;
 
 main(){
-    int num;
+    float num;
     char letter;
     float peri;
 

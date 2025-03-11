@@ -14,11 +14,11 @@ main(){
     
     if (temp1-temp2>10)
     {
-       cout<<"Difference is greater than 10";
+       cout<<"Difference is greater than 10 " <<endl;
     }
     if (temp2-temp1>10)
         {
-       cout<<"Difference is greater than 10";
+       cout<<"Difference is greater than 10 "<<endl;
     }
 
     cout<<"Program ends ";

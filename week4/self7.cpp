@@ -21,8 +21,8 @@ main(){
     cin>>num5;
     cout<<endl;
 
-    perc=(num1+num2+num3+num4+num5)/500*100;
-    cout<<"Your percentage:"<<perc<<"%";
+    perc=(num1+num2+num3+num4+num5)/500.0*100;
+    cout<<"Your percentage:"<<perc<<"%"<<endl;
 
 
     if (perc>=70)

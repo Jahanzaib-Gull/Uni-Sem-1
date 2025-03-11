@@ -12,7 +12,12 @@ main(){
     if (price==500)
     {
         discount=price*0.05;
-        cout<<"Price after discount:"<<discount;   
+        cout<<"Price after discount:"<<discount<<endl;   
+        cout<<"Discounted Price:"<<price-discount<<endl;
+
     }
-    cout<<"Price after discount:"<<price;   
+    else{
+        cout<<"Price after discount:"<<price<<endl; 
+    }
+      
 }

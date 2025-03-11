@@ -6,8 +6,8 @@ main(){
     cout<<"Enter the temperature in fahrenheit:";
     cin>>temp;
     cout<<endl;
-    cel=5/9*(temp-32);
-    cout<<"Given temperature in celcius is:"<<cel;
+    cel=5/9.0*(temp-32);
+    cout<<"Given temperature in celcius is:"<<cel<<endl;
 
     if (cel>=40)
     {

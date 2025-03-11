@@ -2,7 +2,7 @@
 using namespace std;
 
 main(){
-    int num;
+    float num;
     float kg;
     cout<<"Enter the number of grams:";
     cin>>num;
