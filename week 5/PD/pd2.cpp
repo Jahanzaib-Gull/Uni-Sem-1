@@ -6,6 +6,6 @@ main(){
     cout<<"Enter the name of country you live in: ";
     cin>>country;
     cout<<endl;
-    if(!(country=="Germany")||!(country=="Australia"))
+    if((country!="Germany")&&(country!="Australia"))
         cout<<"You should come to visit Germany and Australia sometime! ";
 }    
