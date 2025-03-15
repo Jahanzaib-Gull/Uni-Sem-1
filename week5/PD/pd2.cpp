@@ -7,5 +7,5 @@ main(){
     cin>>country;
     cout<<endl;
     if((country!="Germany")&&(country!="Australia"))
-        cout<<"You should come to visit Germany and Australia sometime! ";
+        cout<<"You should come to visit Germany or Australia sometime! ";
 }    
