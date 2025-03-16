@@ -3,8 +3,10 @@ using namespace std;
 
 main(){
     string name;
-    float marks1,marks2,marks3,marks4,marks5,perc,total,obtained;
+    float marks1 ,marks2 ,marks3 ,marks4 ,marks5 ,perc ,total ,obtained ;
+
     total=500;
+
     cout<<"Enter your name: ";
     cin>>name;
     cout<<endl;
@@ -32,8 +34,10 @@ main(){
     cout<<endl;
 
     cout<<"Student Name: "<<name<<endl;
+
     obtained=marks1+marks2+marks3+marks4+marks5;
     cout<<"Obtained marks: "<<obtained<<endl;
+    
     perc=(marks1+marks2+marks3+marks4+marks5)/500*100;
     cout<<"The percentage is "<<perc<<"%"<<endl;
     
