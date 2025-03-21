@@ -23,8 +23,6 @@ using namespace std;
         cout<<"The point is inside the image.";
     }
 
-
-
     else if ((y==0 && (x>=0 && x<=h*3))){
         cout<<"The point is on Border of image.";
     }
@@ -56,8 +54,6 @@ using namespace std;
     else if ((y==h*4 && (x>=h && x<=h*2))){
         cout<<"The point is on Border of image.";
     }
-
-
 
     else {
         cout<<"The point is outside the image.";
