@@ -2,19 +2,19 @@
 using namespace std;
 
  main(){
-    int n;
+    int len;
     cout << "Enter the length of the Fibonacci series: ";
-    cin >> n;
+    cin >> len;
     int first = 0, second = 1, next;
-    if (n == 1) {
+    if (len == 1) {
         cout << first << endl;
     }
-    else if(n==2){
+    else if(len==2){
         cout << first << ", " << second;    
     }
-    else if(n>2){
+    else if(len>2){
         cout << first << ", " << second;  
-        for (int i = 2; i < n; i++) {
+        for (int i = 2; i < len; i++) {
             next = first + second;
             cout << ", " << next;
             first = second;

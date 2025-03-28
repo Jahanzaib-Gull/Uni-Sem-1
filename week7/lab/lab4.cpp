@@ -16,7 +16,7 @@ main(){
         }
         num=num/10; 
     }
-    cout<<"Frequency of "<<digit<<":"<<count<<endl;
+    cout<<"Frequency of "<<digit<<": "<<count<<endl;
     
 
 }
