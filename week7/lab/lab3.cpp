@@ -8,7 +8,6 @@ main(){
     if (num=0)
     {
         count++;
-        cout<<"The total number of digits: "<<count;
     }
     if (num<0)
     {
@@ -17,6 +16,7 @@ main(){
     while(num!=0){
         count++;
         num=num/10;
-        cout<<"The total number of digits: "<<count;
     }
+
+    cout<<"The total number of digits: "<<count;
 }

@@ -7,6 +7,17 @@ main(){
     cin>>num;
     cout<<"Enter the digit to check: ";
     cin>>digit;
+    if (num==0)
+    {
+        count++;
+    }
+    
+
+    if (num<0)
+    {
+        num=num*-1;
+    }
+    
 
     while (num>0)
     {
