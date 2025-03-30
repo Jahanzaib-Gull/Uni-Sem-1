@@ -3,15 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Store</title>
+    <title>Online Book Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #515859, #8ca9cd);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: rgb(0, 0, 0);
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            margin: 0;
+            color: #FFD700;
+        }
+        .nav {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: 70vh;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .nav a:hover {
+            color: #d1c218;
+        }
+        .section {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .section h2 {
+            color: #FFD700;
+        }
+        .section p {
+            font-size: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .section img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-height: 400px; 
+            object-fit: cover; 
+        }
+        .book-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 100vh;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 3%;
+        }
+        .book-section h2 {
+            color: #FFD700;
+        }
+        .book-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .book-item {
+            margin: 10px;
+            max-width: 300px;
+        }
+        .book-item img {
+            width: 100%;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .book-item img:hover {
+            transform: scale(1.05);
+        }
+        .buy-button {
+            padding: 10px;
+            background: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: darkgreen;
+        }
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color:lightgray; text-align: center; background: linear-gradient(to right, #b804cf, #ec9979 ); color: aliceblue;">
-    <h1 style="color: #000000;">Welcome to the Online Book Store</h1>
-    <nav>
-        <a href="registration.html" style="margin: 10px; text-decoration: none; color: rgb(0, 0, 0);">Register</a> |
-        <a href="login.html" style="margin: 10px; text-decoration: none; color: rgb(0, 0, 0);">Login</a> |
-        <a href="profile.html" style="margin: 10px; text-decoration: none; color: rgb(0, 0, 0);">Profile</a> |
-        <a href="catalog.html" style="margin: 10px; text-decoration: none; color: rgb(0, 0, 0);">Books Catalog</a>
+<body>
+    
+    <header class="header">
+        <a href="index1.html" style="text-decoration: none; color: inherit;"><h1>Online Book Store</h1></a>
+    </header>
+    
+    <nav class="nav">
+        <a href="registration.html">Register</a> |
+        <a href="login.html">Login</a> |
+        <a href="profile.html">Profile</a> |
+        <a href="catalog.html">Books Catalog</a>
     </nav>
+    
+    <section class="section">
+        <h2>Discover Your Next Favorite Book</h2>
+        <p>Explore a wide range of books from various categories. Whether you're into fiction, non-fiction, or educational books, we have something for everyone!</p>
+        <img src="books-banner.png" alt="Books Banner">
+    </section>
+    
+    <section class="book-section">
+        <h2>Best Sellers</h2>
+        <div class="book-list">
+            <div class="book-item">
+                <img src="book1.webp" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book2.jpg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book3.jpeg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-section">
+        <h2>New Arrivals</h2>
+        <div class="book-list">
+            <div class="book-item">
+                <img src="book4.jpeg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book5.jpeg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book6.jpeg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-section">
+        <h2>Discounted Books</h2>
+        <div class="book-list">
+            <div class="book-item">
+                <img src="book7.webp" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book8.jpg" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+            <div class="book-item">
+                <img src="book9.webp" alt="Book 3">
+                <p>"To Kill a Mockingbird" by Harper Lee</p>
+                <button class="buy-button">Buy Now</button>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <p>&copy; 2025 Online Book Store. All rights reserved.</p>
+    </footer>
+    
 </body>
 </html>

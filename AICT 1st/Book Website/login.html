@@ -5,23 +5,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to right, #515859, #8ca9cd);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #FFD700;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: 70vh;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .nav a:hover {
+            color: #d1c218;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-form {
+            background-color: #c0d1e0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .login-form h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .login-form input {
+            width: 250px;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .login-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+
+        .login-form p a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
 </head>
 
-<body style="font-family: Arial, sans-serif; display: flex;
-     text-align: center; justify-content: center; background: linear-gradient(to right, #b804cf, #ec9979 ); ">
-    <div>
-        <h1 style="color: #000000;">Login</h1>
-
-        <label>Email:</label>
-        <input type="email" name="email" style="margin: 5px;
-        border-radius: 4px; border: none; padding: 3px;"><br><br>
-        <label>Password:</label>
-        <input type="password" name="password"
-            style="margin: 5px; border-radius: 4px; border: none;padding: 3px;"><br><br>
-        <button
-            style="background-color: rgb(29, 186, 134);color: white; border: none;border-radius: 4px; padding: 5px;">Login</button>
+<body>
+    <header class="header">
+        <a href="index1.html" style="text-decoration: none; color: inherit;"><h1>Online Book Store</h1></a>
+    </header>
+    <nav class="nav">
+        <a href="registration.html">Register</a> |
+        <a href="login.html">Login</a> |
+        <a href="profile.html">Profile</a> |
+        <a href="catalog.html">Books Catalog</a>
+    </nav>
+    <div class="content">
+        <div class="login-form">
+            <h1>Login</h1>
+            <label>Email:</label>
+            <input type="email" name="email">
+            <label>Password:</label>
+            <input type="password" name="password">
+            <button>Login</button>
+            <p><a href="#">Forgot Password?</a></p>
+        </div>
     </div>
-
+    <footer class="footer">
+        <p>&copy; 2025 Online Book Store. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
