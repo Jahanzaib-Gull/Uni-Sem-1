@@ -5,7 +5,7 @@ main(){
     int num , count=0 ;
     cout<<"Enter the number: ";
     cin>>num;
-    if (num=0)
+    if (num==0)
     {
         count++;
     }
@@ -17,6 +17,5 @@ main(){
         count++;
         num=num/10;
     }
-
     cout<<"The total number of digits: "<<count;
 }

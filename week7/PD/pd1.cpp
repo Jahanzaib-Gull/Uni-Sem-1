@@ -21,7 +21,8 @@ main(){
         }
         
     }
-    else{
+    else
+    {
         cout<<"The parameter number should be grater than or equal to 1";
     }
     
