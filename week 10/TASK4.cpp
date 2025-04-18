@@ -2,7 +2,7 @@
 using namespace std;
 
 main(){
-    int n ,m ;
+    int n ,m,count;
     cout<<"Enter the starting number ";
     cin>>n;
     cout<<"Enter the ending number ";
@@ -21,6 +21,12 @@ main(){
         }
         if(isPrime){
             cout<<i<<" ";
+
+            count++;
         }
+        
+    }
+    if(count==0){
+        cout<<"No prime number in this range";
     }
 }
