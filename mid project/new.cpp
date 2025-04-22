@@ -3,9 +3,9 @@ using namespace std;
 
 main()
 {
-    string tour_Name[1], tour_Price[1], tour_Duration[1], tour_Location[1];
-    string user_Name[1], user_Password[1];
-    string feedback[1];
+    string tour_Name[2], tour_Price[2], tour_Duration[2], tour_Location[2];
+    string user_Name[2], user_Password[2];
+    string feedback[2];
     string admin_Name, admin_Password, user__Name, user__Password;
     int tour_Count = -1, MAX_TOURS = 1;
     int user_Count = -1, MAX_USERS = 1;
@@ -158,7 +158,7 @@ main()
                             cout << endl;
                         }
                     }
-                    
+
                     else if (option == 6)
                     {
                         cout << "(Delete Tour)" << endl;
@@ -292,104 +292,107 @@ main()
             }
             if (user_found)
             {
-                cout << "Welcome " << user__Name << endl;
-                cout << "Select an option from the following:" << endl;
-                cout << "1- View All Tours from highest to lowest price" << endl;
-                cout << "2- Book a Tour" << endl;
-                cout << "3- give feedback out of 10" << endl;
-                cout << "4- Exit" << endl;
-                cout << " Your Option---";
-                cin >> option;
-
-                if (option == 1)
+                while (option != 4)
                 {
-                    cout << "(View All Tours)" << endl;
-                    if (tour_Count == -1)
-                    {
-                        cout << "No tours have been added yet." << endl;
-                    }
-                    else if (tour_Count == 0)
-                    {
-                        cout << "Tour Name\tTour Price\tTour Duration\tTour Location" << endl;
-                        cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
-                    }
-                    else if (tour_Count == 1)
-                    {
-                        cout << "Tour Name\tTour Price\tTour Duration\tTour Location" << endl;
-                        if (tour_Price[0] > tour_Price[1])
-                        {
-                            cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
-                            cout << tour_Name[1] << "\t \t" << tour_Price[1] << "\t \t" << tour_Duration[1] << "\t \t" << tour_Location[1] << endl;
-                        }
-                        else
-                        {
-                            cout << tour_Name[1] << "\t \t" << tour_Price[1] << "\t \t" << tour_Duration[1] << "\t \t" << tour_Location[1] << endl;
-                            cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
-                        }
-                    }
-                }
-                else if (option == 2)
-                {
+                    cout << "Welcome " << user__Name << endl;
+                    cout << "Select an option from the following:" << endl;
+                    cout << "1- View All Tours from highest to lowest price" << endl;
+                    cout << "2- Book a Tour" << endl;
+                    cout << "3- give feedback out of 10" << endl;
+                    cout << "4- Exit" << endl;
+                    cout << " Your Option---";
+                    cin >> option;
 
-                    while (option != 3)
+                    if (option == 1)
                     {
-                        cout << "(Book a Tour)" << endl;
+                        cout << "(View All Tours)" << endl;
                         if (tour_Count == -1)
                         {
                             cout << "No tours have been added yet." << endl;
-                            break;
                         }
-                        cout << "Select a Tour to Book" << endl;
-                        for (int i = 0; i <= tour_Count; i++)
+                        else if (tour_Count == 0)
                         {
-                            cout << i + 1 << "- " << tour_Name[i] << endl;
+                            cout << "Tour Name\tTour Price\tTour Duration\tTour Location" << endl;
+                            cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
                         }
-                        cout << "3- Exit" << endl;
-                        cout << " Your Option---";
-                        cin >> option;
-                        cout << endl;
-
-                        if (option == 1)
+                        else if (tour_Count == 1)
                         {
-                            cout << "Tour Name: " << tour_Name[0] << endl;
-                            cout << "Tour Price: " << tour_Price[0] << endl;
-                            cout << "Tour Duration: " << tour_Duration[0] << endl;
-                            cout << "Tour Location: " << tour_Location[0] << endl;
-                            cout << "Booking Successful" << endl;
-                        }
-                        else if (option == 2)
-                        {
-                            cout << "Tour Name: " << tour_Name[1] << endl;
-                            cout << "Tour Price: " << tour_Price[1] << endl;
-                            cout << "Tour Duration: " << tour_Duration[1] << endl;
-                            cout << "Tour Location: " << tour_Location[1] << endl;
-                            cout << "Booking Successful" << endl;
-                        }
-                        else if (option == 3)
-                        {
-                            cout << "Exit" << endl;
-                        }
-                        else
-                        {
-                            cout << "Invalid Option" << endl;
+                            cout << "Tour Name\tTour Price\tTour Duration\tTour Location" << endl;
+                            if (tour_Price[0] > tour_Price[1])
+                            {
+                                cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
+                                cout << tour_Name[1] << "\t \t" << tour_Price[1] << "\t \t" << tour_Duration[1] << "\t \t" << tour_Location[1] << endl;
+                            }
+                            else
+                            {
+                                cout << tour_Name[1] << "\t \t" << tour_Price[1] << "\t \t" << tour_Duration[1] << "\t \t" << tour_Location[1] << endl;
+                                cout << tour_Name[0] << "\t \t" << tour_Price[0] << "\t \t" << tour_Duration[0] << "\t \t" << tour_Location[0] << endl;
+                            }
                         }
                     }
-                }
-                else if (option == 3)
-                {
-                    cout << "(Give Feedback)" << endl;
-                    cout << "Enter your feedback out of 10: ";
-                    cin >> feedback[0];
-                    cout << "Feedback submitted successfully" << endl;
-                    feedback_count++;
-                }
-                else if (option == 4)
-                {
-                    cout << "Exit" << endl;
-                }
-                else
-                {
-                    cout << "Invalid Option" << endl;
+                    else if (option == 2)
+                    {
+
+                        while (option != 3)
+                        {
+                            cout << "(Book a Tour)" << endl;
+                            if (tour_Count == -1)
+                            {
+                                cout << "No tours have been added yet." << endl;
+                                break;
+                            }
+                            cout << "Select a Tour to Book" << endl;
+                            for (int i = 0; i <= tour_Count; i++)
+                            {
+                                cout << i + 1 << "- " << tour_Name[i] << endl;
+                            }
+                            cout << "3- Exit" << endl;
+                            cout << " Your Option---";
+                            cin >> option;
+                            cout << endl;
+
+                            if (option == 1)
+                            {
+                                cout << "Tour Name: " << tour_Name[0] << endl;
+                                cout << "Tour Price: " << tour_Price[0] << endl;
+                                cout << "Tour Duration: " << tour_Duration[0] << endl;
+                                cout << "Tour Location: " << tour_Location[0] << endl;
+                                cout << "Booking Successful" << endl;
+                            }
+                            else if (option == 2)
+                            {
+                                cout << "Tour Name: " << tour_Name[1] << endl;
+                                cout << "Tour Price: " << tour_Price[1] << endl;
+                                cout << "Tour Duration: " << tour_Duration[1] << endl;
+                                cout << "Tour Location: " << tour_Location[1] << endl;
+                                cout << "Booking Successful" << endl;
+                            }
+                            else if (option == 3)
+                            {
+                                cout << "Exit" << endl;
+                            }
+                            else
+                            {
+                                cout << "Invalid Option" << endl;
+                            }
+                        }
+                    }
+                    else if (option == 3)
+                    {
+                        cout << "(Give Feedback)" << endl;
+                        cout << "Enter your feedback out of 10: ";
+                        cin >> feedback[0];
+                        cout << "Feedback submitted successfully" << endl;
+                        feedback_count++;
+                    }
+                    else if (option == 4)
+                    {
+                        cout << "Exit" << endl;
+                    }
+                    else
+                    {
+                        cout << "Invalid Option" << endl;
+                    }
                 }
             }
             else
