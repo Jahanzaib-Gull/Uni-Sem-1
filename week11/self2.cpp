@@ -19,13 +19,13 @@ main()
         {
             if (i == 1 || i % 2 != 0)
             {
-                discounted_price = price * 0.05;
+                discounted_price = price-price * 0.05;
                 cout << "The discounted price is: " << discounted_price << endl;
                 break;
             }
             else
             {
-                discounted_price = price * 0.10;
+                discounted_price = price-price * 0.10;
                 cout << "The discounted price is: " << discounted_price << endl;
                 break;
             }
