@@ -12,5 +12,5 @@ main()
     cout << "Enter the side length of the Rubik's Cube: ";
     cin >> sideLength;
     int no_of_stickers = Stickers(sideLength);
-    cout << "Number of stickers needed: " << Stickers << endl;
+    cout << "Number of stickers needed: " << no_of_stickers << endl;
 }
