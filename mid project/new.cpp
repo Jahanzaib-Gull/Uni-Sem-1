@@ -15,7 +15,7 @@ main()
     while (option != 4)
     {
         cout << "******************************************************************" << endl;
-        cout << "*                   TOUR MANAGEMENT SYSTEM                       *" << endl;
+        cout << "*                    TOUR MANAGEMENT SYSTEM                      *" << endl;
         cout << "******************************************************************" << endl;
 
         cout << endl;
