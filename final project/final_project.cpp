@@ -10,42 +10,44 @@ using namespace std;
 void main_header();
 void separation();
 string main_menu();
-void admin_login();
+void admin_login(string name, string password);
 string admin_menu();
-void add_tour();
+void get_tour_data();
+void add_tour(string name, string destination, string pickup, string duration, int price, string description, string category);
 void save_tours_to_file();
 string getField(string record, int field);
 void load_tours_from_file();
 void view_tours();
 void view_tour_orderly();
 void view_users();
-void dlt_tour();
-void dlt_user();
-void user_signup();
-void user_login();
+void dlt_tour(string tour_name);
+void dlt_user(string user_name);
+void get_user_data();
+void user_signup(string username, string password, string full_name, string email, string phone);
+void user_login(string user_name, string user_password);
 void save_users_to_file();
 void load_users_from_file();
 string user_menu();
 void view_profile();
-void view_tour_by_category();
+void view_tour_by_category(string category);
 void update_user_info();
 void change_user_name();
 void change_password();
 void change_user_email();
 void change_user_phone();
 void change_user_full_name();
-void tour_discrription();
+void tour_discrription(string tour_name);
 void clear_screen();
-void give_feedback();
+void give_feedback(string feedback_stars, string feedback);
 void view_your_feedback();
 void view_feedbacks();
 void about_us();
 void green();
-void book_tour_no_of_people_by_user();
+void book_tour_no_of_people_by_user(string user_book_tour_name, int number_of_people);
 void user_booking_details();
 void view_all_users_booking_details();
 
-// data structures
+// Data Structures
 const int MAX_TOURS = 20;
 string tour_nameA[MAX_TOURS];
 string tour_destinationA[MAX_TOURS];
@@ -68,13 +70,12 @@ int user_total_priceA[MAX_USERS];
 string user_booked_tour_nameA[MAX_USERS];
 int user_count = 0;
 
-string admin_Name, admin_Password;
 string logined_user_name, loggedin_user_password;
 bool login_user = false;
-bool login_admin=false;
+bool login_admin = false;
 
 // main function
-main()
+int main()
 {
     green();
     string main_option = " ";
@@ -83,11 +84,17 @@ main()
         system("CLS");
         main_header();
         main_option = main_menu();
+
         if (main_option == "1")
         {
             system("CLS");
             main_header();
-            admin_login();
+            string admin_name, admin_password;
+            cout << "Enter Admin Name: ";
+            cin >> admin_name;
+            cout << "Enter Admin Password: ";
+            cin >> admin_password;
+            admin_login(admin_name, admin_password);
 
             string admin_option = " ";
             while (login_admin)
@@ -99,7 +106,7 @@ main()
                 main_header();
                 if (admin_option == "1")
                 {
-                    add_tour();
+                    get_tour_data();
                 }
                 else if (admin_option == "2")
                 {
@@ -121,18 +128,37 @@ main()
                 {
                     view_all_users_booking_details();
                 }
-                else if (admin_option =="7")
+                else if (admin_option == "7")
                 {
-                    dlt_tour();
+                    load_tours_from_file();
+                    if (tour_count == 0)
+                    {
+                        cout << "No tours available to delete." << endl;
+                        continue;
+                    }
+                    string tour_name;
+                    cout << "Enter Tour Name to delete: ";
+                    cin.ignore();
+                    getline(cin, tour_name);
+                    dlt_tour(tour_name);
                 }
                 else if (admin_option == "8")
                 {
-                    dlt_user();
+                    load_users_from_file();
+                    if (user_count == 0)
+                    {
+                        cout << "No users available to delete." << endl;
+                        continue;
+                    }
+                    string user_name;
+                    cout << "Enter Username to delete: ";
+                    cin >> user_name;
+                    dlt_user(user_name);
                 }
                 else if (admin_option == "9")
                 {
                     cout << "Exiting..." << endl;
-                    login_admin=false;
+                    login_admin = false;
                     break;
                 }
                 else
@@ -146,25 +172,32 @@ main()
         {
             system("CLS");
             main_header();
-            user_signup();
+            get_user_data();
             clear_screen();
         }
         else if (main_option == "3")
         {
             system("CLS");
             main_header();
-            user_login();
-            string user_option = " ";
-            if (login_user == false)
+            load_users_from_file();
+            if (user_count == 0)
+            {
+                cout << "no user available." << endl;
+                continue;
+            }
+            string user_name, user_password;
+            cout << "Enter User Name: ";
+            cin >> user_name;
+            cout << "Enter User Password: ";
+            cin >> user_password;
+            user_login(user_name, user_password);
+            if (!login_user)
             {
                 clear_screen();
                 continue;
             }
-            else
-            {
-                clear_screen();
-            }
-
+            clear_screen();
+            string user_option = " ";
             while (true)
             {
                 system("CLS");
@@ -190,15 +223,51 @@ main()
                 }
                 else if (user_option == "5")
                 {
-                    view_tour_by_category();
+                    load_tours_from_file();
+                    if (tour_count == 0)
+                    {
+                        cout << "No tours available." << endl;
+                        continue;
+                    }
+                    separation();
+                    string category;
+                    cout << "Enter Tour Category: ";
+                    cin.ignore();
+
+                    getline(cin, category);
+                    view_tour_by_category(category);
                 }
                 else if (user_option == "6")
                 {
-                    tour_discrription();
+                    load_tours_from_file();
+                    if (tour_count == 0)
+                    {
+                        cout << "No tours available." << endl;
+                        continue;
+                    }
+                    string tour_name;
+                    cout << "Enter Tour Name to view description: ";
+                    cin.ignore();
+                    getline(cin, tour_name);
+                    tour_discrription(tour_name);
                 }
                 else if (user_option == "7")
                 {
-                    book_tour_no_of_people_by_user();
+                    load_tours_from_file();
+                    if (tour_count == 0)
+                    {
+                        cout << "No tours available." << endl;
+                        continue;
+                    }
+                    cout << "--------Tour Booking--------" << endl;
+                    cout << "Enter Tour Name to book: ";
+                    string user_book_tour_name;
+                    cin.ignore();
+                    getline(cin, user_book_tour_name);
+                    cout << "Enter number of people: ";
+                    int number_of_people;
+                    cin >> number_of_people;
+                    book_tour_no_of_people_by_user(user_book_tour_name, number_of_people);
                 }
                 else if (user_option == "8")
                 {
@@ -206,7 +275,15 @@ main()
                 }
                 else if (user_option == "9")
                 {
-                    give_feedback();
+                    cout << "--------Feedback--------" << endl;
+                    cout << "Enter your feedback stars (1-5): ";
+                    cin.ignore();
+                    string feedback_stars;
+                    getline(cin, feedback_stars);
+                    cout << "Enter your feedback: ";
+                    string feedback;
+                    getline(cin, feedback);
+                    give_feedback(feedback_stars,feedback);
                 }
                 else if (user_option == "10")
                 {
@@ -275,26 +352,18 @@ string main_menu()
     cin >> option;
     return option;
 }
-void admin_login()
+void admin_login(string name, string password)
 {
-
-        cout << "Admin Login -->" << endl;
-        separation();
-        cout << "Enter Admin Name: ";
-        cin >> admin_Name;
-        cout << "Enter Admin Password: ";
-        cin >> admin_Password;
-        if (admin_Name == "admin" && admin_Password == "admin123")
-        {
-            cout << "Welcome " << admin_Name << endl;
-            login_admin=true;
-        }
-        else
-        {
-            cout << "Invalid credentials. Please try again." << endl;
-        }
-        clear_screen();
-        return;
+    if (name == "admin" && password == "admin123")
+    {
+        cout << "Welcome " << name << endl;
+        login_admin = true;
+    }
+    else
+    {
+        cout << "Invalid credentials. Please try again." << endl;
+    }
+    clear_screen();
 }
 string admin_menu()
 {
@@ -314,7 +383,29 @@ string admin_menu()
     cin >> option;
     return option;
 }
-void add_tour()
+void get_tour_data()
+{
+    string names, destination, pickup, duration, description, category;
+    int price;
+    cin.ignore();
+    cout << "Enter Tour Name: ";
+    getline(cin, names);
+    cout << "Enter Destination: ";
+    getline(cin, destination);
+    cout << "Enter Pickup: ";
+    getline(cin, pickup);
+    cout << "Enter Duration: ";
+    getline(cin, duration);
+    cout << "Enter Price: ";
+    cin >> price;
+    cin.ignore();
+    cout << "Enter Description: ";
+    getline(cin, description);
+    cout << "Enter Category: ";
+    getline(cin, category);
+    add_tour(names, destination, pickup, duration, price, description, category);
+}
+void add_tour(string name, string destination, string pickup, string duration, int price, string description, string category)
 {
     load_tours_from_file();
     if (tour_count >= MAX_TOURS)
@@ -322,32 +413,21 @@ void add_tour()
         cout << "Tour limit reached. Cannot add more tours." << endl;
         return;
     }
-    cout << "Add Tour -->" << endl;
-    separation();
-    cout << "Enter Tour Name: ";
-    cin.ignore();
-    getline(cin, tour_nameA[tour_count]);
     for (int i = 0; i < tour_count; i++)
     {
-        if (tour_nameA[i] == tour_nameA[tour_count])
+        if (tour_nameA[i] == name)
         {
             cout << "Tour name already exists." << endl;
             return;
         }
     }
-    cout << "Enter Tour Destination: ";
-    getline(cin, tour_destinationA[tour_count]);
-    cout << "Enter Tour Pickup Point: ";
-    getline(cin, tour_pickupA[tour_count]);
-    cout << "Enter Tour Duration: ";
-    getline(cin, tour_durationA[tour_count]);
-    cout << "Enter Tour Price: ";
-    cin >> tour_priceA[tour_count];
-    cout << "Enter Tour Description: ";
-    cin.ignore();
-    getline(cin, tour_discriptionA[tour_count]);
-    cout << "Enter Tour Category: ";
-    getline(cin, tour_categoryA[tour_count]);
+    tour_nameA[tour_count] = name;
+    tour_destinationA[tour_count] = destination;
+    tour_pickupA[tour_count] = pickup;
+    tour_durationA[tour_count] = duration;
+    tour_priceA[tour_count] = price;
+    tour_discriptionA[tour_count] = description;
+    tour_categoryA[tour_count] = category;
     tour_count++;
     cout << "Tour added successfully." << endl;
     save_tours_to_file();
@@ -414,8 +494,8 @@ void view_tours()
     cout << "Tour Name\tTour Price\tTour Duration\tTour Pickup\tTour destination\tTour Category" << endl;
     for (int i = 0; i < tour_count; i++)
     {
-        cout << tour_nameA[i] << "\t\t" << tour_priceA[i] << "\t\t" << tour_durationA[i] << "\t\t" 
-        << tour_pickupA[i] << "\t\t" << tour_destinationA[i] << "\t\t" << tour_categoryA[i] << endl;
+        cout << tour_nameA[i] << "\t\t" << tour_priceA[i] << "\t\t" << tour_durationA[i] << "\t\t"
+             << tour_pickupA[i] << "\t\t" << tour_destinationA[i] << "\t\t" << tour_categoryA[i] << endl;
     }
 }
 void view_tour_orderly()
@@ -522,21 +602,11 @@ void load_users_from_file()
     }
     file.close();
 }
-void dlt_tour()
+void dlt_tour(string tour_name)
 {
     load_users_from_file();
-    load_tours_from_file();
-    if (tour_count == 0)
-    {
-        cout << "No tours available to delete." << endl;
-        return;
-    }
     cout << "Delete Tour -->" << endl;
     separation();
-    string tour_name;
-    cout << "Enter Tour Name to delete: ";
-    cin.ignore();
-    getline(cin, tour_name);
     for (int i = 0; i < user_count; i++)
     {
         if (user_booked_tour_nameA[i] == tour_name)
@@ -567,22 +637,13 @@ void dlt_tour()
             return;
         }
     }
-    cout << "Invalid tour name. Please enter correct tour name."<<endl;
+    cout << "Invalid tour name. Please enter correct tour name." << endl;
 }
 
-void dlt_user()
+void dlt_user(string user_name)
 {
-    load_users_from_file();
-    if (user_count == 0)
-    {
-        cout << "No users available to delete." << endl;
-        return;
-    }
     cout << "Delete User -->" << endl;
     separation();
-    string user_name;
-    cout << "Enter Username to delete: ";
-    cin >> user_name;
     for (int i = 0; i < user_count; i++)
     {
         if (user_nameA[i] == user_name)
@@ -605,9 +666,25 @@ void dlt_user()
             return;
         }
     }
-    cout << "Invalid username. Please enter correct username."<<endl;
+    cout << "Invalid username. Please enter correct username." << endl;
 }
-void user_signup()
+void get_user_data()
+{
+    string username, password, full_name, email, phone;
+    cin.ignore();
+    cout << "Enter Username: ";
+    getline(cin, username);
+    cout << "Enter Password: ";
+    getline(cin, password);
+    cout << "Enter Full Name: ";
+    getline(cin, full_name);
+    cout << "Enter Email: ";
+    getline(cin, email);
+    cout << "Enter Phone: ";
+    getline(cin, phone);
+    user_signup(username, password, full_name, email, phone);
+}
+void user_signup(string username, string password, string full_name, string email, string phone)
 {
     load_users_from_file();
     if (user_count >= MAX_USERS)
@@ -615,29 +692,19 @@ void user_signup()
         cout << "User limit reached." << endl;
         return;
     }
-    cout << "User Sign Up -->" << endl;
-    separation();
-    cout << "Enter Username: ";
-    cin.ignore();
-    getline(cin, user_nameA[user_count]);
     for (int i = 0; i < user_count; i++)
     {
-        if (user_nameA[i] == user_nameA[user_count])
+        if (user_nameA[i] == username)
         {
             cout << "User name already exists." << endl;
-            cout << "Please choose a different user name." << endl;
             return;
         }
     }
-    cout << "Enter User Password: ";
-    getline(cin, user_passwordA[user_count]);
-    cout << "Enter User Full Name: ";
-    getline(cin, user_full_nameA[user_count]);
-    cout << "Enter User Email: ";
-    getline(cin, user_emailA[user_count]);
-    cout << "Enter User Phone Number: ";
-    getline(cin, user_phoneA[user_count]);
-    
+    user_nameA[user_count] = username;
+    user_passwordA[user_count] = password;
+    user_full_nameA[user_count] = full_name;
+    user_emailA[user_count] = email;
+    user_phoneA[user_count] = phone;
     user_feedbackA[user_count] = " ";
     user_feedback_starsA[user_count] = " ";
     user_total_priceA[user_count] = 0;
@@ -646,21 +713,11 @@ void user_signup()
     cout << "User signed up successfully." << endl;
     save_users_to_file();
 }
-void user_login()
+
+void user_login(string user_name, string user_password)
 {
-    load_users_from_file();
-    if (user_count == 0)
-    {
-        cout << "no user available." << endl;
-        return;
-    }
     cout << "User Login -->" << endl;
     separation();
-    string user_name, user_password;
-    cout << "Enter User Name: ";
-    cin >> user_name;
-    cout << "Enter User Password: ";
-    cin >> user_password;
     for (int i = 0; i < user_count; i++)
     {
         if (user_nameA[i] == user_name && user_passwordA[i] == user_password)
@@ -672,7 +729,7 @@ void user_login()
             return;
         }
     }
-    cout << "Invalid username or password. Please try again"<<endl;
+    cout << "Invalid username or password. Please try again" << endl;
 }
 string user_menu()
 {
@@ -714,20 +771,11 @@ void view_profile()
         }
     }
 }
-void view_tour_by_category()
+void view_tour_by_category(string category)
 {
-    load_tours_from_file();
-    if (tour_count == 0)
-    {
-        cout << "No tours available." << endl;
-        return;
-    }
+
     cout << "View Tours by Category -->" << endl;
-    separation();
-    string category;
-    cout << "Enter Tour Category: ";
-    cin.ignore();
-    getline(cin, category);
+
     cout << "-----------Tours in " << category << " Category-----------" << endl;
     cout << "Tour Name\tTour Price\tTour Duration\tTour Pickup\tTour destination" << endl;
     for (int i = 0; i < tour_count; i++)
@@ -870,18 +918,9 @@ void change_user_full_name()
         }
     }
 }
-void tour_discrription()
+void tour_discrription(string tour_name)
 {
-    load_tours_from_file();
-    if (tour_count == 0)
-    {
-        cout << "No tours available." << endl;
-        return;
-    }
-    string tour_name;
-    cout << "Enter Tour Name to view description: ";
-    cin.ignore();
-    getline(cin, tour_name);
+
     cout << "--------Tour Discription--------" << endl;
     for (int i = 0; i < tour_count; i++)
     {
@@ -907,16 +946,9 @@ void clear_screen()
     getch();
     system("CLS");
 }
-void give_feedback()
+void give_feedback(string feedback_stars, string feedback)
 {
-    cout << "--------Feedback--------" << endl;
-    cout << "Enter your feedback stars (1-5): ";
-    cin.ignore();
-    string feedback_stars;
-    getline(cin, feedback_stars);
-    cout << "Enter your feedback: ";
-    string feedback;
-    getline(cin, feedback);
+
     if (feedback_stars.empty() || feedback.empty())
     {
         cout << "All fields are required." << endl;
@@ -979,14 +1011,8 @@ void about_us()
     cout << "Our mission is to make your travel dreams come true." << endl;
     cout << "Contact us for more information." << endl;
 }
-void book_tour_no_of_people_by_user()
+void book_tour_no_of_people_by_user(string user_book_tour_name, int number_of_people)
 {
-    load_tours_from_file();
-    if (tour_count == 0)
-    {
-        cout << "No tours available." << endl;
-        return;
-    }
     for (int i = 0; i < user_count; i++)
     {
         if (user_nameA[i] == logined_user_name && user_total_priceA[i] != 0)
@@ -1005,21 +1031,8 @@ void book_tour_no_of_people_by_user()
                 cout << "You can continue with your previous booking." << endl;
                 return;
             }
+            break;
         }
-    }
-
-    cout << "--------Tour Booking--------" << endl;
-    cout << "Enter Tour Name to book: ";
-    string user_book_tour_name;
-    cin.ignore();
-    getline(cin, user_book_tour_name);
-    cout << "Enter number of people: ";
-    int number_of_people;
-    cin >> number_of_people;
-    if (number_of_people <= 0)
-    {
-        cout << "Invalid number of people." << endl;
-        return;
     }
     for (int i = 0; i < tour_count; i++)
     {
@@ -1104,7 +1117,7 @@ void user_booking_details()
 void view_all_users_booking_details()
 {
     load_users_from_file();
-     if (user_count == 0)
+    if (user_count == 0)
     {
         cout << "no user available." << endl;
         return;
