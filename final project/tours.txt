@@ -1,2 +1,1 @@
-tour2,bahawalpur,lahore,4 days,a tour from lahore to bahawlpur,historical,20000
-tour5,Babusar,Islamabad,8 days,a tour from lahore to Babusar top,mountainary,40000
+tour1,tou,tty,tyy,trytr,fgd,32432
