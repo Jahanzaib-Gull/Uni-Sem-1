@@ -1,8 +1,9 @@
 #include <iostream>
 // #include <fstream>
+#include <conio.h>
 #include <windows.h>
-#include <cstdlib> // For srand() and rand()
-#include <ctime>   // For time()
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -15,19 +16,22 @@ int ghost2X = 22, ghost2Y = 35;
 bool ghost2right = true;
 
 int ghost3X = 6, ghost3Y = 69;
-// int ghost4X = 1, ghost4Y = 1;
+
+int ghost4X = 14, ghost4Y = 35;
 
 int score = 0;
-int dots = 220;
+int dots = 100;
+int energizer_timer = 0;
+int pacman_lives = 3;
 
 const int rows = 31;
 const int cols = 71;
-int pacman_lives = 3;
+
 
 bool gameRunning = true;
 bool energizer = false;
 
-int energizer_timer = 0;
+
 
 void gotoxy(int x, int y)
 {
@@ -98,6 +102,8 @@ void initialghost()
     gotoxy(ghost2Y, ghost2X);
     cout << "G";
     gotoxy(ghost3Y, ghost3X);
+    cout << "G";
+    gotoxy(ghost4Y, ghost4X);
     cout << "G";
 }
 
@@ -296,7 +302,7 @@ void moveGhost3Random()
     {
         return;
     }
-    if (mapp[newX][newY] == '#')
+    if (mapp[newX][newY] == '#' || mapp[newX][newY] == '_')
     {
         return;
     }
@@ -308,22 +314,112 @@ void moveGhost3Random()
         if (energizer)
         {
             score += 10;
-            ghost3X = 6;
-            ghost3Y = 69; // respawn
+            int randX, randY;
+            do
+            {
+                randX = rand() % 23;
+                randY = rand() % 70;
+            } while (mapp[randX][randY] == '#' || mapp[randX][randY] == '_' || mapp[randX][randY] == '|' || mapp[randX][randY] == 'G');
+            ghost3X = randX;
+            ghost3Y = randY;
             gotoxy(ghost3Y, ghost3X);
             cout << "G";
+            return;
         }
         else
         {
             pacman_lives--;
             updatePacman();
         }
-        return;
     }
     ghost3X = newX;
     ghost3Y = newY;
     gotoxy(ghost3Y, ghost3X);
     cout << "G";
+}
+void moveGhost4FollowPacman()
+{
+    int newX = ghost4X;
+    int newY = ghost4Y;
+
+    gotoxy(ghost4Y, ghost4X);
+    cout << mapp[ghost4X][ghost4Y];
+
+    bool moved = false;
+
+    if (pacmanX < ghost4X && mapp[ghost4X - 1][ghost4Y] != '#' && mapp[ghost4X - 1][ghost4Y] != '_' && mapp[ghost4X - 1][ghost4Y] != '|')
+    {
+        newX = ghost4X - 1;
+        moved = true;
+    }
+    else if (pacmanX > ghost4X && mapp[ghost4X + 1][ghost4Y] != '#' && mapp[ghost4X + 1][ghost4Y] != '_' && mapp[ghost4X + 1][ghost4Y] != '|')
+    {
+        newX = ghost4X + 1;
+        moved = true;
+    }
+
+    if (!moved)
+    {
+        if (pacmanY < ghost4Y && mapp[ghost4X][ghost4Y - 1] != '#' && mapp[ghost4X][ghost4Y - 1] != '_' && mapp[ghost4X][ghost4Y - 1] != '|')
+        {
+            newY = ghost4Y - 1;
+            moved = true;
+        }
+        else if (pacmanY > ghost4Y && mapp[ghost4X][ghost4Y + 1] != '#' && mapp[ghost4X][ghost4Y + 1] != '_' && mapp[ghost4X][ghost4Y + 1] != '|')
+        {
+            newY = ghost4Y + 1;
+            moved = true;
+        }
+    }
+
+    if (!moved)
+    {
+        if (mapp[ghost4X - 1][ghost4Y] != '#' && mapp[ghost4X - 1][ghost4Y] != '_' && mapp[ghost4X - 1][ghost4Y] != '|')
+        {
+            newX = ghost4X - 1;
+        }
+        else if (mapp[ghost4X + 1][ghost4Y] != '#' && mapp[ghost4X + 1][ghost4Y] != '_' && mapp[ghost4X + 1][ghost4Y] != '|')
+        {
+            newX = ghost4X + 1;
+        }
+        else if (mapp[ghost4X][ghost4Y - 1] != '#' && mapp[ghost4X][ghost4Y - 1] != '_' && mapp[ghost4X][ghost4Y - 1] != '|')
+        {
+            newY = ghost4Y - 1;
+        }
+        else if (mapp[ghost4X][ghost4Y + 1] != '#' && mapp[ghost4X][ghost4Y + 1] != '_' && mapp[ghost4X][ghost4Y + 1] != '|')
+        {
+            newY = ghost4Y + 1;
+        }
+    }
+
+    if (newX == pacmanX && newY == pacmanY)
+    {
+        if (energizer)
+        {
+            score += 10;
+            int randX, randY;
+            do
+            {
+                randX = rand() % 23;
+                randY = rand() % 70;
+            } while (mapp[randX][randY] == '#' || mapp[randX][randY] == '_' || mapp[randX][randY] == '|' || mapp[randX][randY] == 'G');
+            ghost4X = randX;
+            ghost4Y = randY;
+            gotoxy(ghost4Y, ghost4X);
+            cout << 'G';
+            return;
+        }
+        else
+        {
+            pacman_lives--;
+            updatePacman();
+        }
+    }
+
+    ghost4X = newX;
+    ghost4Y = newY;
+    gotoxy(ghost4Y, ghost4X);
+    cout << 'G';
 }
 
 void movePacmanLeft()
@@ -455,17 +551,26 @@ main()
     initialghost();
     while (gameRunning)
     {
-        Sleep(300);
+        Sleep(200);
         printscore();
         energizertime();
         updating();
         moveGhost3Random();
+        moveGhost4FollowPacman();
         if (dots == 0)
         {
+            system("CLS");
+            cout << "\t YOU WIN!";
+            cout << "Press any key to continue...";
+            getch();
             gameRunning = false;
         }
         if (pacman_lives == 0)
         {
+            system("CLS");
+            cout << "\t YOU lOSE!";
+            cout << "Press any key to continue...";
+            getch();
             gameRunning = false;
         }
         if (GetAsyncKeyState(VK_LEFT))
@@ -486,6 +591,10 @@ main()
         }
         if (GetAsyncKeyState(VK_ESCAPE))
         {
+            system("CLS");
+            cout << "\t EXITING...!";
+            cout << "Press any key to continue...";
+            getch();
             gameRunning = false;
         }
     }
