@@ -9,12 +9,13 @@ int pacmanX = 6, pacmanY = 4;
 int ghost1X = 1, ghost1Y = 16;
 bool ghost1up = true;
 
-// int ghost2X = 1, ghost2Y = 1;
+int ghost2X = 22, ghost2Y = 35;
+bool ghost2right = true;
 // int ghost3X = 1, ghost3Y = 1;
 // int ghost4X = 1, ghost4Y = 1;
 
 int score = 0;
-int dots = 261;
+int dots = 220;
 
 const int rows = 31;
 const int cols = 71;
@@ -86,6 +87,13 @@ void printMap()
         }
         cout << endl;
     }
+}
+
+void initialghost(){
+    gotoxy(ghost1Y, ghost1X);
+    cout << "G";
+    gotoxy(ghost2Y, ghost2X);
+    cout << "G";
 }
 
 void moveGhost1UP()
@@ -164,7 +172,83 @@ void moveGhost1Down()
     gotoxy(ghost1Y, ghost1X);
     cout << "G";
 }
-void ghost1()
+
+void moveghost2right()
+{
+    if (ghost2X == pacmanX && ghost2Y + 1 == pacmanY)
+    {
+        if (energizer)
+        {
+            score += 20;
+            char original = mapp[ghost2X][ghost2Y];
+            gotoxy(ghost2Y, ghost2X);
+            cout << original;
+            ghost2X = 22;
+            ghost2Y = 35;
+            gotoxy(ghost2Y, ghost2X);
+            cout << "G";
+            return;
+        }
+        else
+        {
+            pacman_lives--;
+            updatePacman();
+        }
+    }
+    if (mapp[ghost2X][ghost2Y + 1] == '#')
+    {
+        ghost2right = false;
+        return;
+    }
+    if (mapp[ghost2X][ghost2Y + 1] == ' ' || mapp[ghost2X][ghost2Y + 1] == '.' || mapp[ghost2X][ghost2Y + 1] == 'O')
+    {
+        char original = mapp[ghost2X][ghost2Y];
+        gotoxy(ghost2Y, ghost2X);
+        cout << original;
+    }
+    ghost2Y = ghost2Y + 1;
+    gotoxy(ghost2Y, ghost2X);
+    cout << "G";
+}
+void moveghost2left()
+{
+    if (ghost2X == pacmanX && ghost2Y - 1 == pacmanY)
+    {
+        if (energizer)
+        {
+            score += 20;
+            char original = mapp[ghost2X][ghost2Y];
+            gotoxy(ghost2Y, ghost2X);
+            cout << original;
+            ghost2X = 22;
+            ghost2Y = 35;
+            gotoxy(ghost2Y, ghost2X);
+            cout << "G";
+            return;
+        }
+        else
+        {
+            pacman_lives--;
+            updatePacman();
+        }
+    }
+    if (mapp[ghost2X][ghost2Y - 1] == '#')
+    {
+        ghost2right = true;
+        return;
+    }
+    if (mapp[ghost2X][ghost2Y - 1] == ' ' || mapp[ghost2X][ghost2Y - 1] == '.' || mapp[ghost2X][ghost2Y - 1] == 'O')
+    {
+        char original = mapp[ghost2X][ghost2Y];
+        gotoxy(ghost2Y, ghost2X);
+        cout << original;
+    }
+    ghost2Y = ghost2Y - 1;
+    gotoxy(ghost2Y, ghost2X);
+    cout << "G";
+}
+
+void updating()
 {
     if (ghost1up)
     {
@@ -173,6 +257,14 @@ void ghost1()
     else
     {
         moveGhost1Down();
+    }
+    if (ghost2right)
+    {
+        moveghost2right();
+    }
+    else
+    {
+        moveghost2left();
     }
 }
 
@@ -291,7 +383,7 @@ void energizertime()
 void printscore()
 {
     gotoxy(85, 5);
-    cout << "Score: " << score << "\tlives: "<<pacman_lives;
+    cout << "Score: " << score << "\tlives: " << pacman_lives;
 }
 
 main()
@@ -301,14 +393,13 @@ main()
     printMap();
     gotoxy(pacmanY, pacmanX);
     cout << "p";
-    gotoxy(ghost1Y, ghost1X);
-    cout << "G";
+    initialghost();
     while (gameRunning)
     {
         Sleep(300);
         printscore();
         energizertime();
-        ghost1();
+        updating();
         if (dots == 0)
         {
             gameRunning = false;
