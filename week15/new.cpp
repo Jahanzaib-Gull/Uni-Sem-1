@@ -20,7 +20,6 @@ int dots = 220;
 const int rows = 31;
 const int cols = 71;
 int pacman_lives = 3;
-// const int tickTime = 100;
 
 bool gameRunning = true;
 bool energizer = false;
