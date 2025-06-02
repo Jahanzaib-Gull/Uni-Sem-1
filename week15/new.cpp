@@ -1,6 +1,8 @@
 #include <iostream>
 // #include <fstream>
 #include <windows.h>
+#include <cstdlib> // For srand() and rand()
+#include <ctime>   // For time()
 
 using namespace std;
 
@@ -11,7 +13,8 @@ bool ghost1up = true;
 
 int ghost2X = 22, ghost2Y = 35;
 bool ghost2right = true;
-// int ghost3X = 1, ghost3Y = 1;
+
+int ghost3X = 6, ghost3Y = 69;
 // int ghost4X = 1, ghost4Y = 1;
 
 int score = 0;
@@ -94,6 +97,8 @@ void initialghost()
     cout << "G";
     gotoxy(ghost2Y, ghost2X);
     cout << "G";
+    gotoxy(ghost3Y, ghost3X);
+    cout << "G";
 }
 
 void moveGhost1UP()
@@ -102,7 +107,7 @@ void moveGhost1UP()
     {
         if (energizer)
         {
-            score += 20;
+            score += 10;
             char original = mapp[ghost1X][ghost1Y];
             gotoxy(ghost1Y, ghost1X);
             cout << original;
@@ -139,7 +144,7 @@ void moveGhost1Down()
     {
         if (energizer)
         {
-            score += 20;
+            score += 10;
             char original = mapp[ghost1X][ghost1Y];
             gotoxy(ghost1Y, ghost1X);
             cout << original;
@@ -177,7 +182,7 @@ void moveghost2right()
     {
         if (energizer)
         {
-            score += 20;
+            score += 10;
             char original = mapp[ghost2X][ghost2Y];
             gotoxy(ghost2Y, ghost2X);
             cout << original;
@@ -214,7 +219,7 @@ void moveghost2left()
     {
         if (energizer)
         {
-            score += 20;
+            score += 10;
             char original = mapp[ghost2X][ghost2Y];
             gotoxy(ghost2Y, ghost2X);
             cout << original;
@@ -266,6 +271,61 @@ void updating()
     }
 }
 
+void moveGhost3Random()
+{
+    int dir = rand() % 8;
+    int newX = ghost3X;
+    int newY = ghost3Y;
+    if (dir == 0 || dir == 4)
+    {
+        newX--;
+    }
+    else if (dir == 1 || dir == 5)
+    {
+        newX++;
+    }
+    else if (dir == 2 || dir == 6)
+    {
+        newY--;
+    }
+    else if (dir == 3 || dir == 7)
+    {
+        newY++;
+    }
+    if (newX <= 0 || newX >= 23 || newY <= 0 || newY >= 70)
+    {
+        return;
+    }
+    if (mapp[newX][newY] == '#')
+    {
+        return;
+    }
+    char original = mapp[ghost3X][ghost3Y];
+    gotoxy(ghost3Y, ghost3X);
+    cout << original;
+    if (newX == pacmanX && newY == pacmanY)
+    {
+        if (energizer)
+        {
+            score += 10;
+            ghost3X = 6;
+            ghost3Y = 69; // respawn
+            gotoxy(ghost3Y, ghost3X);
+            cout << "G";
+        }
+        else
+        {
+            pacman_lives--;
+            updatePacman();
+        }
+        return;
+    }
+    ghost3X = newX;
+    ghost3Y = newY;
+    gotoxy(ghost3Y, ghost3X);
+    cout << "G";
+}
+
 void movePacmanLeft()
 {
     if (mapp[pacmanX][pacmanY - 1] == ' ' || mapp[pacmanX][pacmanY - 1] == '.' || mapp[pacmanX][pacmanY - 1] == 'O')
@@ -277,7 +337,7 @@ void movePacmanLeft()
         }
         if (mapp[pacmanX][pacmanY - 1] == 'O')
         {
-            score += 10;
+            score += 5;
             energizer = true;
             energizer_timer = 30;
         }
@@ -304,7 +364,7 @@ void movePacmanRight()
         }
         if (mapp[pacmanX][pacmanY + 1] == 'O')
         {
-            score += 10;
+            score += 5;
             energizer = true;
             energizer_timer = 30;
         }
@@ -331,7 +391,7 @@ void movePacmanUP()
         }
         if (mapp[pacmanX - 1][pacmanY] == 'O')
         {
-            score += 10;
+            score += 5;
             energizer = true;
             energizer_timer = 30;
         }
@@ -354,7 +414,7 @@ void movePacmanDown()
         }
         if (mapp[pacmanX + 1][pacmanY] == 'O')
         {
-            score += 10;
+            score += 5;
             energizer = true;
             energizer_timer = 30;
         }
@@ -387,6 +447,7 @@ void printscore()
 main()
 {
     system("CLS");
+    srand(time(0));
     hideCursor();
     printMap();
     gotoxy(pacmanY, pacmanX);
@@ -398,6 +459,7 @@ main()
         printscore();
         energizertime();
         updating();
+        moveGhost3Random();
         if (dots == 0)
         {
             gameRunning = false;
