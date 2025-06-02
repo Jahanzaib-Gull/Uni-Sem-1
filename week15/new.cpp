@@ -89,7 +89,8 @@ void printMap()
     }
 }
 
-void initialghost(){
+void initialghost()
+{
     gotoxy(ghost1Y, ghost1X);
     cout << "G";
     gotoxy(ghost2Y, ghost2X);
@@ -106,7 +107,6 @@ void moveGhost1UP()
             char original = mapp[ghost1X][ghost1Y];
             gotoxy(ghost1Y, ghost1X);
             cout << original;
-
             ghost1X = 1;
             ghost1Y = 16;
             gotoxy(ghost1Y, ghost1X);
@@ -144,7 +144,6 @@ void moveGhost1Down()
             char original = mapp[ghost1X][ghost1Y];
             gotoxy(ghost1Y, ghost1X);
             cout << original;
-
             ghost1X = 1;
             ghost1Y = 16;
             gotoxy(ghost1Y, ghost1X);
