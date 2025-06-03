@@ -10,14 +10,12 @@ using namespace std;
 int pacmanX = 6, pacmanY = 4;
 
 int ghost1X = 1, ghost1Y = 16;
-bool ghost1up = true;
-
 int ghost2X = 22, ghost2Y = 35;
-bool ghost2right = true;
-
 int ghost3X = 6, ghost3Y = 69;
-
 int ghost4X = 14, ghost4Y = 35;
+
+bool ghost1up = true;
+bool ghost2right = true;
 
 int score = 0;
 int dots = 100;
@@ -26,7 +24,6 @@ int pacman_lives = 3;
 
 const int rows = 31;
 const int cols = 71;
-
 
 bool gameRunning = true;
 bool energizer = false;
